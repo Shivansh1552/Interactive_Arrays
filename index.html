@@ -40,20 +40,28 @@
 <p>Before loading a library, please check Chrome's console for loggings on what's going on!</p>
 <p>A) Select libraries you want to load</p>
 <ul id="frameworks">
-    <li><input id="@lodash" value="lodash" type="checkbox"><span>lodash</span>
+    <li><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span>lodash</span>
     </li>
-    <li><input id="@underscore" value="underscore" type="checkbox"><span>underscore</span>
+    <li><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span>underscore</span>
     </li>
-    <li><input id="@ramda" value="ramda" type="checkbox"><span>ramda</span>
+    <li><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span>ramda</span>
     </li>
-    <li><input id="@moment" value="moment" type="checkbox"><span>moment</span>
+    <li><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span>moment</span>
     </li>
-    <li><input id="@math" value="math" type="checkbox"><span>math</span>
+    <li><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span>math</span>
     </li>
-    <li><input id="@collect" value="collect" type="checkbox"><span>collect</span>
+    <li><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span>collect</span>
     </li>
 </ul>
 <button id="Frameworks" style="border: 1px solid red">Load</button>
+<br>
+<img id="lodashIcon" src="lodash.png"  style="visibility:hidden" width="100"/>
+<img id="underscoreIcon" src="underscore.png"  style="visibility:hidden" width="100"/>
+<img id="ramdaIcon" src="ramda.png"  style="visibility:hidden" width="100"/>
+<img id="momentIcon" src="moment.png"  style="visibility:hidden" width="100"/>
+<img id="mathIcon" src="math.png"  style="visibility:hidden" width="100"/>
+<img id="collectIcon" src="collect.jpg"  style="visibility:hidden" width="100"/>
+
     <hr>
     <p>B) Load another library! (experimental)</p>
 <form>
@@ -265,8 +273,19 @@ function Hide(HideID)
 {
   HideID.style.display = "none"; 
 }
-    
+
+function toggleVisibility(id) {
+   var el = document.getElementById(id);
+
+   if (el.style.visibility=="visible") {
+          el.style.visibility="hidden";
+     }
+     else {
+          el.style.visibility="visible";
+     }
+ }
 </script>
+<br>
 <div class="ShowHide" id="loggingBar">
   <div id="right">
     <a href="#" onclick="Hide(loggingBar);">X</a>
@@ -277,5 +296,8 @@ function Hide(HideID)
 </div>
 
 This section shows results of 'print(someObject)' which returns all functions in someObject.
+
+
+
     
 </html>
