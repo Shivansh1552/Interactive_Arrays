@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title></title>
+    <script src="https://browser.sentry-cdn.com/5.9.1/bundle.min.js" integrity="sha384-/x1aHz0nKRd6zVUazsV6CbQvjJvr6zQL2CHbQZf3yoLkezyEtZUpqUNnOLW9Nt3v" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
     <link rel="stylesheet" href="nofuss.css" type="text/css">
     <style>
@@ -176,6 +177,7 @@
             console.log("%cInteractive Arrays", helloWorld)
             var b = "color:#0F669D;font-weight:bold;";
             console.log('%cjquery script loaded! Version:' + $.fn.jquery, b);
+            Sentry.init({ dsn: 'https://b20d3fb31f5247b0b3873400bb4a28cf@sentry.io/1840726' });
         }
         $(document).ready(function ($) {
 
