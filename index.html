@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,81 +38,82 @@
         .ShowHide a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
- 
+
 <body>
-<div id="error">
+    <div id="error">
 
-    <p style="background-color:red;color:white;font-size:150%">Welcome to Interactive Arrays! Chrome console is not open so you need to open it to continue!</p>
-    <img height="100%" width="100%" src="resources/images/Peugeot_404_Injection.jpg" />
-    <p>
-    The Peugeot 404 is a large family car produced by French automobile manufacturer Peugeot from 1960 to 1975. A truck body style variant was marketed until 1988. The 404 was manufactured under licence in various African countries until 1991 (in Kenya) and was manufactured in Argentina by Safrar/Sevel in El Palomar, in Québec, Canada at the St-Bruno-de-Montarville SOMA Ltd. plant and in Chile by Automotores Franco Chilena S.A. in Los Andes.  <a href="https://en.wikipedia.org/wiki/Peugeot_404">The Wikipedia</a>
-    </p>
-    
-</div>
-<div id="options">
-    <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
-    <p>A) Select libraries you want to load</p>
-    <ul id="frameworks">
-        <li><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span>lodash</span>
-        </li>
-        <li><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span>underscore</span>
-        </li>
-        <li><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span>ramda</span>
-        </li>
-        <li><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span>moment</span>
-        </li>
-        <li><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span>math</span>
-        </li>
-        <li><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span>collect</span>
-        </li>
-    </ul>
-    <button id="Frameworks" style="border: 1px solid red">Load</button>
-    <br>
-    <img id="lodashIcon" src="resources/images/lodash.png" style="visibility:hidden" width="100" />
-    <img id="underscoreIcon" src="resources/images/underscore.png" style="visibility:hidden" width="100" />
-    <img id="ramdaIcon" src="resources/images/ramda.png" style="visibility:hidden" width="100" />
-    <img id="momentIcon" src="resources/images/moment.png" style="visibility:hidden" width="100" />
-    <img id="mathIcon" src="resources/images/math.png" style="visibility:hidden" width="100" />
-    <img id="collectIcon" src="resources/images/collect.jpg" style="visibility:hidden" width="100" />
+        <p style="background-color:red;color:white;font-size:150%">Welcome to Interactive Arrays! Chrome console is not open so you need to open it to continue!</p>
+        <img height="100%" width="100%" src="resources/images/Peugeot_404_Injection.jpg" />
+        <p>
+            The Peugeot 404 is a large family car produced by French automobile manufacturer Peugeot from 1960 to 1975. A truck body style variant was marketed until 1988. The 404 was manufactured under licence in various African countries until 1991 (in Kenya) and was manufactured in Argentina by Safrar/Sevel in El Palomar, in Québec, Canada at the St-Bruno-de-Montarville SOMA Ltd. plant and in Chile by Automotores Franco Chilena S.A. in Los Andes. <a href="https://en.wikipedia.org/wiki/Peugeot_404">The Wikipedia</a>
+        </p>
 
-    <hr>
-    <p>B) Load another library! (experimental)</p>
-    <form>
-        Library:<br>
-        <input type="text" id="arbLibrary"><br>
-        CDN URL: https://cdnjs.cloudflare.com/...<br>
-        <input type="text" id="arbURL"><br>
-        Version variable:<br>
-        <input type="text" id="arbVersion"><br><br>
-        Library variable:<br>
-        <input type="text" id="arbVariable"><br><br>
-        <input type="button" value="Load" onclick="custom_loadScript()">
-    </form>
-    <p>C) Unload all</p>
-    <form>
-        <button type="button" value="Unload" onclick="unloadScripts()">Unload</button>
-    </form>
-    <hr>
-    <p>This section shows results of 'print(someObject)' which returns all functions in someObject.</p>
-    <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
-        <div id="right">
-            <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
-            <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
-        </div>
-        <div id="left">
-            Logging
+    </div>
+    <div id="options">
+        <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
+        <p>A) Select libraries you want to load</p>
+        <ul id="frameworks">
+            <li><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span>lodash</span>
+            </li>
+            <li><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span>underscore</span>
+            </li>
+            <li><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span>ramda</span>
+            </li>
+            <li><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span>moment</span>
+            </li>
+            <li><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span>math</span>
+            </li>
+            <li><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span>collect</span>
+            </li>
+        </ul>
+        <button id="Frameworks" style="border: 1px solid red">Load</button>
+        <br>
+        <img id="lodashIcon" src="resources/images/lodash.png" style="visibility:hidden" width="100" />
+        <img id="underscoreIcon" src="resources/images/underscore.png" style="visibility:hidden" width="100" />
+        <img id="ramdaIcon" src="resources/images/ramda.png" style="visibility:hidden" width="100" />
+        <img id="momentIcon" src="resources/images/moment.png" style="visibility:hidden" width="100" />
+        <img id="mathIcon" src="resources/images/math.png" style="visibility:hidden" width="100" />
+        <img id="collectIcon" src="resources/images/collect.jpg" style="visibility:hidden" width="100" />
+
+        <hr>
+        <p>B) Load another library! (experimental)</p>
+        <form>
+            Library:<br>
+            <input type="text" id="arbLibrary"><br>
+            CDN URL: https://cdnjs.cloudflare.com/...<br>
+            <input type="text" id="arbURL"><br>
+            Version variable:<br>
+            <input type="text" id="arbVersion"><br><br>
+            Library variable:<br>
+            <input type="text" id="arbVariable"><br><br>
+            <input type="button" value="Load" onclick="custom_loadScript()">
+        </form>
+        <p>C) Unload all</p>
+        <form>
+            <button type="button" value="Unload" onclick="unloadScripts()">Unload</button>
+        </form>
+        <hr>
+        <p>This section shows results of 'print(someObject)' which returns all functions in someObject.</p>
+        <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+            <div id="right">
+                <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
+                <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
+            </div>
+            <div id="left">
+                Logging
+            </div>
         </div>
     </div>
-</div>
 </body>
 <script src="resources/js/main.js"></script>
 <script src="vendors/devtools-detect-index.js"></script>
 
 
 <script type="module">
-	// Check if it's open
+    // Check if it's open
 	console.log('Is DevTools open:', window.devtools.isOpen);
 	// Check it's orientation, `undefined` if not open
 	console.log('DevTools orientation:', window.devtools.orientation);
@@ -135,4 +137,5 @@
 		console.log('DevTools orientation:', event.detail.orientation);
 	});
 </script>
+
 </html>

@@ -13,7 +13,10 @@ console.dir(console);
 
 function _loadScript(selectedIds) {
     "use strict";
-    var i, o = 0, pathes = [], versionPath = [], variablePath = [];
+    var i, o = 0,
+        pathes = [],
+        versionPath = [],
+        variablePath = [];
     for (i = 0; i < selectedIds.length; i++) {
         if (!window[selectedIds[i]]) {
             pathes[o] = frameworks[selectedIds[i]][0];
@@ -31,7 +34,9 @@ function _loadScript(selectedIds) {
     //            var scripts = new Array();
     var j, script;
     for (j = 0; j < selectedIds.length; j++) {
-        var path = pathes[j], verPath = versionPath[j], varPath = variablePath[j];
+        var path = pathes[j],
+            verPath = versionPath[j],
+            varPath = variablePath[j];
         script = document.createElement('script');
         script.type = 'text/javascript';
         script.newVarPath = selectedIds[j];
@@ -88,7 +93,7 @@ function unloadScripts() {
 }
 window.onload = function () {
     "use strict";
-    var helloWorld = "font-size:21px; font-weight:200; letter-spacing:0.2em; line-height:1.4em; font-family:helvetica,arial; color:rgba(0,0,25,0.5);";
+    var helloWorld = "font-size:21px; font-weight:200; letter-spacing:0.2em; line-height:1.4em; font-family:helvetica,arial; color:rgba(0,0,25,0.5); background: #222; color: #bada55";
     console.log("%cInteractive Arrays", helloWorld);
     var b = "color:#0F669D;font-weight:bold;";
     console.log('%cjquery script loaded! Version:' + $.fn.jquery, b);
@@ -125,10 +130,12 @@ var docURLs = {
 }
 
 function print(Obj, lib) {
-    var functions = [], long = false, strObj;
-    if(typeof Obj == 'string'){
+    var functions = [],
+        long = false,
+        strObj;
+    if (typeof Obj == 'string') {
         strObj = Obj;
-    }else{
+    } else {
         if ((typeof Obj.prototype) == 'object') {
             console.info('Only logging functions in object');
             functions = Object.getOwnPropertyNames(Obj).filter(function (p) {
@@ -142,10 +149,10 @@ function print(Obj, lib) {
             console.info("cannot log object in the web page");
             return;
         }
-        for(o in window){ 
-           if(window[o] === Obj){
-              lib = o;
-           }
+        for (o in window) {
+            if (window[o] === Obj) {
+                lib = o;
+            }
         }
         if (lib && functions) {
             var j;
