@@ -39,10 +39,19 @@
         }
     </style>
 </head>
-
+ 
 <body>
+<div id="error">
 
-    <p>Before loading a library, please check Chrome's console for loggings on what's going on!</p>
+    <p style="background-color:red;color:white;font-size:150%">Welcome to Interactive Arrays! Chrome console is not open so you need to open it to continue!</p>
+    <img height="100%" width="100%" src="resources/images/Peugeot_404_Injection.jpg" />
+    <p>
+    The Peugeot 404 is a large family car produced by French automobile manufacturer Peugeot from 1960 to 1975. A truck body style variant was marketed until 1988. The 404 was manufactured under licence in various African countries until 1991 (in Kenya) and was manufactured in Argentina by Safrar/Sevel in El Palomar, in Québec, Canada at the St-Bruno-de-Montarville SOMA Ltd. plant and in Chile by Automotores Franco Chilena S.A. in Los Andes.  <a href="https://en.wikipedia.org/wiki/Peugeot_404">The Wikipedia</a>
+    </p>
+    
+</div>
+<div id="options">
+    <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
     <p>A) Select libraries you want to load</p>
     <ul id="frameworks">
         <li><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span>lodash</span>
@@ -84,17 +93,46 @@
     <form>
         <button type="button" value="Unload" onclick="unloadScripts()">Unload</button>
     </form>
-</body>
-<script src="resources/js/main.js"></script>
-<br>
-<div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:400px;">
-    <div id="right">
-        <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
-        <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
-    </div>
-    <div id="left">
-        Logging
+    <hr>
+    <p>This section shows results of 'print(someObject)' which returns all functions in someObject.</p>
+    <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+        <div id="right">
+            <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
+            <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
+        </div>
+        <div id="left">
+            Logging
+        </div>
     </div>
 </div>
+</body>
+<script src="resources/js/main.js"></script>
+<script src="vendors/devtools-detect-index.js"></script>
 
-This section shows results of 'print(someObject)' which returns all functions in someObject.</html>
+
+<script type="module">
+	// Check if it's open
+	console.log('Is DevTools open:', window.devtools.isOpen);
+	// Check it's orientation, `undefined` if not open
+	console.log('DevTools orientation:', window.devtools.orientation);
+    if(!window.devtools.isOpen){
+        $('#error').show();
+        $('#options').hide();
+    }else{
+        $('#error').hide();
+        $('#options').show();
+    }
+	// Get notified when it's opened/closed or orientation changes
+	window.addEventListener('devtoolschange', event => {
+        if(!event.detail.isOpen){
+            $('#error').show();
+            $('#options').hide();
+        }else{
+            $('#error').hide();
+            $('#options').show();
+        }
+		console.log('Is DevTools open:', event.detail.isOpen);
+		console.log('DevTools orientation:', event.detail.orientation);
+	});
+</script>
+</html>
