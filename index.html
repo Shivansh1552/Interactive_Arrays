@@ -7,7 +7,8 @@
     <title></title>
     <script src="https://browser.sentry-cdn.com/5.9.1/bundle.min.js" integrity="sha384-/x1aHz0nKRd6zVUazsV6CbQvjJvr6zQL2CHbQZf3yoLkezyEtZUpqUNnOLW9Nt3v" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="vendors/nofuss.css" type="text/css">
+    <link rel="stylesheet" href="https://unpkg.com/picnic">
+    
     <style>
         .ShowHide {
             overflow: hidden;
@@ -38,7 +39,6 @@
         .ShowHide a:hover {
             text-decoration: underline;
         }
-
     </style>
 </head>
 
@@ -52,23 +52,24 @@
         </p>
 
     </div>
+
     <div id="options">
         <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
         <p>A) Select libraries you want to load</p>
-        <ul id="frameworks">
-            <li><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span>lodash</span>
-            </li>
-            <li><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span>underscore</span>
-            </li>
-            <li><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span>ramda</span>
-            </li>
-            <li><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span>moment</span>
-            </li>
-            <li><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span>math</span>
-            </li>
-            <li><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span>collect</span>
-            </li>
-        </ul>
+        <div id="frameworks">
+            <label><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span class="checkable">lodash</span>
+            </label>
+            <label><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span class="checkable">underscore</span>
+            </label>
+            <label><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span class="checkable">ramda</span>
+            </label>
+            <label><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span class="checkable">moment</span>
+            </label>
+            <label><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span class="checkable">math</span>
+            </label>
+            <label><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span class="checkable">collect</span>
+            </label>
+        </div>
         <button id="Frameworks" style="border: 1px solid red">Load</button>
         <br>
         <img id="lodashIcon" src="resources/images/lodash.png" style="visibility:hidden" width="100" />
@@ -136,6 +137,4 @@
 		console.log('Is DevTools open:', event.detail.isOpen);
 		console.log('DevTools orientation:', event.detail.orientation);
 	});
-</script>
-
-</html>
+</script></html>
