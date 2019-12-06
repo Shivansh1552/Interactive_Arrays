@@ -1,3 +1,6 @@
+var observer = lozad();
+observer.observe();
+
 var frameworks = {
     'lodash': ["https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.15/lodash.core.js", '_.VERSION', '_'],
     'jquery': ["", "$.fn.jquery"],
@@ -8,11 +11,11 @@ var frameworks = {
     'collect': ["https://cdnjs.cloudflare.com/ajax/libs/collect.js/4.16.6/collect.js", "", "collect"]
 };
 var loaded = [];
-console.log("Chrome 'console' object");
-console.dir(console);
+
 
 function _loadScript(selectedIds) {
     "use strict";
+
     var i, o = 0,
         pathes = [],
         versionPath = [],
@@ -42,9 +45,11 @@ function _loadScript(selectedIds) {
         script.newVarPath = selectedIds[j];
         script.verPath = verPath;
         script.varPath = varPath;
+        script.startTime = new Date().getMilliseconds();
         script.onload = function (script) {
             var b = "color:#0F669D;font-weight:bold;";
-            console.log(this.newVarPath + '%c script loaded!', b);
+            var endTime = new Date().getMilliseconds();
+            console.log(this.newVarPath + '%c script loaded!' + 'in ' + (endTime - this.startTime) + ' ms', b);
             loaded.push(this.newVarPath);
             try {
                 console.log('%cVersion:' + eval("window." + this.verPath), b);
@@ -95,11 +100,13 @@ window.onload = function () {
     "use strict";
     var helloWorld = "font-size:21px; font-weight:200; letter-spacing:0.2em; line-height:1.4em; font-family:helvetica,arial; color:rgba(0,0,25,0.5); background: #222; color: #bada55";
     console.log("%cInteractive Arrays", helloWorld);
+    console.log("Think of getting full advantage of Chrome 'console' object https://developers.google.com/web/tools/chrome-devtools/console/api");
+    console.dir(console);
     var b = "color:#0F669D;font-weight:bold;";
     console.log('%cjquery script loaded! Version:' + $.fn.jquery, b);
-    Sentry.init({
-        dsn: 'https://b20d3fb31f5247b0b3873400bb4a28cf@sentry.io/1840726'
-    });
+    //    Sentry.init({
+    //        dsn: 'https://b20d3fb31f5247b0b3873400bb4a28cf@sentry.io/1840726'
+    //    });
 }
 $(document).ready(function ($) {
     "use strict";
@@ -166,8 +173,8 @@ function print(Obj, lib) {
     //check if div exist
     //if not create it and also add a script
     //that scrolls on bottom on every change
+    console.log("I put a debugger breakpoint so that you can see code running this webpage, ie: you could help me write a better code for this !")
     debugger;
-
     if (long)
         strObj = "<br />" + strObj + "<br />";
     if (x) {
@@ -202,6 +209,22 @@ function print(Obj, lib) {
                         }`;
         document.body.appendChild(script);
     }
+}
+
+function stringifyObject(e) {
+    const obj = {};
+    for (let k in e) {
+        obj[k] = e[k];
+    }
+    var str = JSON.stringify(obj, (k, v) => {
+        if (v instanceof Node) return 'Node';
+        if (v instanceof Window) return 'Window';
+        return v;
+    }, ' ');
+    var x = document.getElementById("loggingBar");
+    x.innerHTML = str;
+    document.body.appendChild(x);
+    return str;
 }
 
 function Hide(divID) {

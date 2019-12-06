@@ -5,9 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
-    <script src="https://browser.sentry-cdn.com/5.9.1/bundle.min.js" integrity="sha384-/x1aHz0nKRd6zVUazsV6CbQvjJvr6zQL2CHbQZf3yoLkezyEtZUpqUNnOLW9Nt3v" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/picnic">
+    <meta name="theme-color" content="#317EFB" />
+
     <style>
         .ShowHide {
             overflow: hidden;
@@ -39,21 +42,94 @@
             text-decoration: underline;
         }
 
+        #error {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        #options {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 21px;
+            font-weight: 200;
+            font-family: helvetica, arial;
+            color: rgba(0, 0, 25, 0.5);
+            background: #222;
+            color: #bada55
+        }
+
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            display: none;
+            float: left;
+            min-width: 160px;
+            padding: 5px 0;
+            margin: 2px 0 0;
+            list-style: none;
+            font-size: 14px;
+            text-align: left;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+            background-clip: padding-box;
+        }
+
+        .ui-autocomplete>li>div {
+            display: block;
+            padding: 3px 20px;
+            clear: both;
+            font-weight: normal;
+            line-height: 1.42857143;
+            color: #333333;
+            white-space: nowrap;
+        }
+
+        .ui-state-hover,
+        .ui-state-active,
+        .ui-state-focus {
+            text-decoration: none;
+            color: #262626;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+
+        .ui-helper-hidden-accessible {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+
     </style>
+    <meta name="Description" content="WYSIWYG JavaScript libraries loading using browser developer tools for testing and learning. Load Jquery, Underscore, Lodash in your browser console">
+
 </head>
 
 <body>
     <div id="error">
-
+        <h1> _Interactive Arrays</h1>
         <p style="background-color:red;color:white;font-size:150%">Welcome to Interactive Arrays! Chrome console is not open so you need to open it to continue!</p>
-        <img height="100%" width="100%" src="resources/images/Peugeot_404_Injection.jpg" />
+        <img height="100%" width="100%" class="lozad" data-src="resources/images/Peugeot_404_Injection.jpg" />
         <p>
             The Peugeot 404 is a large family car produced by French automobile manufacturer Peugeot from 1960 to 1975. A truck body style variant was marketed until 1988. The 404 was manufactured under licence in various African countries until 1991 (in Kenya) and was manufactured in Argentina by Safrar/Sevel in El Palomar, in Québec, Canada at the St-Bruno-de-Montarville SOMA Ltd. plant and in Chile by Automotores Franco Chilena S.A. in Los Andes. <a href="https://en.wikipedia.org/wiki/Peugeot_404">The Wikipedia</a>
         </p>
-
     </div>
 
     <div id="options">
+        <h1> _Interactive Arrays</h1>
         <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
         <p>A) Select libraries you want to load</p>
         <div id="frameworks">
@@ -72,44 +148,46 @@
         </div>
         <button id="Frameworks" style="border: 1px solid red">Load</button>
         <br>
-        <img id="lodashIcon" src="resources/images/lodash.png" style="visibility:hidden" width="100" />
-        <img id="underscoreIcon" src="resources/images/underscore.png" style="visibility:hidden" width="100" />
-        <img id="ramdaIcon" src="resources/images/ramda.png" style="visibility:hidden" width="100" />
-        <img id="momentIcon" src="resources/images/moment.png" style="visibility:hidden" width="100" />
-        <img id="mathIcon" src="resources/images/math.png" style="visibility:hidden" width="100" />
-        <img id="collectIcon" src="resources/images/collect.jpg" style="visibility:hidden" width="100" />
+        <img id="lodashIcon" class="lozad" data-src="resources/images/lodash.png" style="visibility:hidden" width="100" />
+        <img id="underscoreIcon" class="lozad" data-src="resources/images/underscore.png" style="visibility:hidden" width="100" />
+        <img id="ramdaIcon" class="lozad" data-src="resources/images/ramda.png" style="visibility:hidden" width="100" />
+        <img id="momentIcon" class="lozad" data-src="resources/images/moment.png" style="visibility:hidden" width="100" />
+        <img id="mathIcon" class="lozad" data-src="resources/images/math.png" style="visibility:hidden" width="100" />
+        <img id="collectIcon" class="lozad" data-src="resources/images/collect.jpg" style="visibility:hidden" width="100" />
 
         <hr>
+
         <p>B) Load another library! (experimental)</p>
         <form>
             Library:<br>
             <input type="text" id="arbLibrary"><br>
-            CDN URL: https://cdnjs.cloudflare.com/...<br>
-            <input type="text" id="arbURL"><br>
-            Version variable:<br>
+            CDN URL: https://cdnjs.cloudflare.com/... (required)<br>
+            <input type="text" id="arbURL" onclick="updateInput(this.value)"><br>
+            Version variable (optional)<br>
             <input type="text" id="arbVersion"><br><br>
-            Library variable:<br>
+            Library default variable (required)<br>
             <input type="text" id="arbVariable"><br><br>
             <input type="button" value="Load" onclick="custom_loadScript()">
         </form>
         <p>C) Unload all</p>
         <form>
-            <button type="button" value="Unload" onclick="unloadScripts()">Unload</button>
+            <button type="button" value="Unload" onclick="unloadScripts(this.value)">Unload</button>
         </form>
         <hr>
-        <p>This section shows results of 'print(someObject)' which returns all functions in someObject.</p>
+        <p>This section shows results of 'print(obj)' which returns all functions in obj along with links to official documentations.</p>
         <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
             <div id="right">
                 <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
                 <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
             </div>
-            <div id="left">
+            <pre id="left">
                 Logging
-            </div>
+            </pre>
         </div>
     </div>
-    This is <a href="https://www.linkedin.com/in/abderrahim-benseguane-85018413a/">Abderrahim Benseguane</a> discovering JavaScript along with HTML dom in 3 days.
-    I acknowledge <a href="https://github.com/bacloud14/Interactive_Arrays">code here</a> is very poorly written, as I am a beginner in JS for web developement. If you have time to review not more than one thousand lines of code as a form of collaboration, you are more than welcome.
+    <br>
+    <p>This is <a href="https://www.linkedin.com/in/abderrahim-benseguane-85018413a/">Abderrahim Benseguane</a> discovering JavaScript along with HTML dom in 3 days.
+        I acknowledge <a href="https://github.com/bacloud14/Interactive_Arrays">code here</a> is very poorly written, as I am a beginner in JS for web developement. If you have time to review not more than one thousand lines of code as a form of collaboration, you are more than welcome.</p>
 </body>
 <script src="resources/js/main.js"></script>
 <script src="vendors/devtools-detect-index.js"></script>
@@ -117,9 +195,7 @@
 
 <script type="module">
     // Check if it's open
-	console.log('Is DevTools open:', window.devtools.isOpen);
 	// Check it's orientation, `undefined` if not open
-	console.log('DevTools orientation:', window.devtools.orientation);
     if(!window.devtools.isOpen){
         $('#error').show();
         $('#options').hide();
@@ -136,9 +212,29 @@
             $('#error').hide();
             $('#options').show();
         }
-		console.log('Is DevTools open:', event.detail.isOpen);
-		console.log('DevTools orientation:', event.detail.orientation);
 	});
+</script>
+<script>
+    var availableTags = [];
+    $.getJSON("vendors/libraries.json", function(json) {
+        availableTags = $.map(json.results, function(o) {
+            return o["name"];
+        }); // this will show the info it in firebug console
+        $("#arbLibrary").autocomplete({
+            source: availableTags
+        });
+        availableURLTags = $.map(json.results, function(o) {
+            return o["latest"];
+        }); // this will show the info it in firebug console
+        $("#arbURL").autocomplete({
+            source: availableURLTags
+        });
+    });
+
+    function updateInput() {
+        document.getElementById("arbURL").value = document.getElementById("arbLibrary").value;
+    }
+
 </script>
 
 </html>
