@@ -45,29 +45,41 @@ function _loadScript(selectedIds) {
         script.newVarPath = selectedIds[j];
         script.verPath = verPath;
         script.varPath = varPath;
+        var arr = path.split('/');
+        var version_ = arr[arr.length - 2];
+        if (version_ && !version_.match(/[a-z]/i))
+            script.version_ = version_;
+        debugger;
         script.startTime = new Date().getMilliseconds();
         script.onload = function (script) {
-            var b = "color:#0F669D;font-weight:bold;";
-            var endTime = new Date().getMilliseconds();
-            console.log(this.newVarPath + '%c script loaded!' + 'in ' + (endTime - this.startTime) + ' ms', b);
-            loaded.push(this.newVarPath);
+
             try {
                 console.log('%cVersion:' + eval("window." + this.verPath), b);
             } catch (error) {
-                console.error("failed identifying library's version");
+                console.warn("failed identifying library's version");
+                if (this.version_)
+                    console.log("Identified version from URL instead: " + this.version_);
             }
+            var success = true;
             try {
                 // if the lib offers noConflict
-                eval("window." + this.newVarPath + " = " + this.varPath + ".noConflict()");
+                eval("window[\"" + this.newVarPath + "\"] = " + this.varPath + ".noConflict()");
             } catch (error2) {
+                console.warn("failed loading the script strcictly with no conflict");
                 try {
-                    eval("window." + this.newVarPath + " = " + this.varPath);
+                    eval("window[\"" + this.newVarPath + "\"] = " + this.varPath);
                 } catch (error3) {
-                    console.error("failed loading the script");
+                    success = false
+                    console.error("failed loading the script at all");
                 }
-                console.error("failed loading the script strcictly with no conflict");
             }
-
+            if (success) {
+                var b = "color:#0F669D;font-weight:bold;";
+                var endTime = new Date().getMilliseconds();
+                console.log(this.newVarPath + '%c script loaded!' + 'in ' + (endTime - this.startTime) + ' ms', b);
+                loaded.push(this.newVarPath);
+                document.getElementById("loaded_list").innerHTML = JSON.stringify(loaded);
+            }
         };
         script.src = path;
         document.head.appendChild(script);
@@ -76,8 +88,8 @@ function _loadScript(selectedIds) {
 
 function custom_loadScript() {
     "use strict";
-    var arbLibrary = document.getElementById('arbLibrary').value;
-    var arbURL = "https://cdnjs.cloudflare.com/" + document.getElementById('arbURL').value;
+    var arbLibrary = document.getElementById('arbLibrary').value.replace('.', '_').replace('-', '_');
+    var arbURL = document.getElementById('arbURL').value;
     var arbVersion = document.getElementById('arbVersion').value;
     var arbVariable = document.getElementById('arbVariable').value;
     if (frameworks[arbLibrary]) {

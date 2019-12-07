@@ -61,6 +61,15 @@
             color: #bada55
         }
 
+        #loaded_list {
+            font-size: 10px;
+            font-weight: 50;
+            font-family: helvetica, arial;
+            color: rgba(0, 0, 25, 0.5);
+            background: #500;
+            color: #baaaaa
+        }
+
         .ui-autocomplete {
             position: absolute;
             top: 100%;
@@ -130,6 +139,7 @@
 
     <div id="options">
         <h1> _Interactive Arrays</h1>
+        <div id='loaded_list'></div>
         <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
         <p>A) Select libraries you want to load</p>
         <div id="frameworks">
@@ -226,6 +236,7 @@
         availableURLTags = $.map(json.results, function(o) {
             return o["latest"];
         }); // this will show the info it in firebug console
+
         $("#arbURL").autocomplete({
             source: availableURLTags
         });
