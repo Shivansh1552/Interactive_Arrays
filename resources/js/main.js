@@ -49,7 +49,6 @@ function _loadScript(selectedIds) {
         var version_ = arr[arr.length - 2];
         if (version_ && !version_.match(/[a-z]/i))
             script.version_ = version_;
-        debugger;
         script.startTime = new Date().getMilliseconds();
         script.onload = function (script) {
 
@@ -185,8 +184,6 @@ function print(Obj, lib) {
     //check if div exist
     //if not create it and also add a script
     //that scrolls on bottom on every change
-    console.log("I put a debugger breakpoint so that you can see code running this webpage, ie: you could help me write a better code for this !")
-    debugger;
     if (long)
         strObj = "<br />" + strObj + "<br />";
     if (x) {
