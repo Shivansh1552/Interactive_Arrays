@@ -105,6 +105,7 @@ function unloadScripts() {
     for (j = 0; j < loaded.length; j++) {
         eval("delete window." + loaded[j]);
     }
+    document.getElementById("loaded_list").innerHTML = "";
     console.log('all libraries unloaded from windows context');
 }
 window.onload = function () {
