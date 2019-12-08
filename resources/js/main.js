@@ -51,8 +51,9 @@ function _loadScript(selectedIds) {
             script.version_ = version_;
         script.startTime = new Date().getMilliseconds();
         script.onload = function (script) {
-
+						var b = "color:#0F669D;font-weight:bold;";
             try {
+
                 console.log('%cVersion:' + eval("window." + this.verPath), b);
             } catch (error) {
                 console.warn("failed identifying library's version");
@@ -68,17 +69,22 @@ function _loadScript(selectedIds) {
                 try {
                     eval("window[\"" + this.newVarPath + "\"] = " + this.varPath);
                 } catch (error3) {
-                    success = false
+                    success = false;
                     console.error("failed loading the script at all");
                 }
             }
             if (success) {
-                var b = "color:#0F669D;font-weight:bold;";
                 var endTime = new Date().getMilliseconds();
                 console.log(this.newVarPath + '%c script loaded!' + 'in ' + (endTime - this.startTime) + ' ms', b);
                 loaded.push(this.newVarPath);
                 document.getElementById("loaded_list").innerHTML = JSON.stringify(loaded);
+                $.each(loaded,function(index,value){
+                  var checkbox="<label><input type='checkbox' id="+value+" value="+value+"><span class='checkable'>"+value+"</span></label>";
+                  if(!$("#frameworksDiff").text().includes(value))
+                    $("#frameworksDiff").append($(checkbox));
+                })
             }
+
         };
         script.src = path;
         document.head.appendChild(script);
@@ -97,6 +103,7 @@ function custom_loadScript() {
         frameworks[arbLibrary] = [arbURL, arbVersion, arbVariable];
     }
     _loadScript([arbLibrary]);
+
 }
 
 function unloadScripts() {
@@ -119,7 +126,8 @@ window.onload = function () {
     //    Sentry.init({
     //        dsn: 'https://b20d3fb31f5247b0b3873400bb4a28cf@sentry.io/1840726'
     //    });
-}
+
+};
 $(document).ready(function ($) {
     "use strict";
     $("#Frameworks").hide();
@@ -137,6 +145,24 @@ $(document).ready(function ($) {
             $("#Frameworks").hide();
         }
     });
+    $("#FrameworksDiff").click(function () {
+        var selectedIds = $("#frameworksDiff :checkbox:checked").map(function () {
+            return $(this).val();
+        }).get();
+        var functions = [];
+        selectedIds.map(function(lib, index){
+          if(index==0)
+            functions.push("<b>"+lib+"</b><br>");
+          else {
+            functions.push("<br><b>"+lib+"</b><br>");
+          }
+          functions = functions.concat(Object.getOwnPropertyNames(window[lib]).filter(function (p) {
+              return typeof window[lib][p] === 'function';
+          }));
+        });
+        var strObj = functions.join(', ');
+        print(checkWords(strObj), undefined, "diffBar");
+    });
 });
 
 // <a href="#reduce">reduce</a>
@@ -146,9 +172,11 @@ var docURLs = {
     'ramda': 'https://ramdajs.com/docs/#',
     'jQuery': 'https://api.jquery.com/jQuery.',
     '$': 'https://api.jquery.com/jQuery.'
-}
+};
 
-function print(Obj, lib) {
+function print(Obj, lib, place) {
+    if(!place)
+      place = 'loggingBar';
     var functions = [],
         long = false,
         strObj;
@@ -168,7 +196,7 @@ function print(Obj, lib) {
             console.info("cannot log object in the web page");
             return;
         }
-        for (o in window) {
+        for (var o in window) {
             if (window[o] === Obj) {
                 lib = o;
             }
@@ -181,7 +209,7 @@ function print(Obj, lib) {
             strObj = functions.join(', ');
         }
     }
-    var x = document.getElementById("loggingBar");
+    var x = document.getElementById(place);
     //check if div exist
     //if not create it and also add a script
     //that scrolls on bottom on every change
@@ -189,9 +217,9 @@ function print(Obj, lib) {
         strObj = "<br />" + strObj + "<br />";
     if (x) {
         x.innerHTML += "<br />" + strObj;
-        x.style.display = 'block'
+        x.style.display = 'block';
     } else {
-        let div = document.createElement("pre"),
+        var div = document.createElement("pre"),
             css = "display:block;" +
             "position:fixed;" +
             "z-index:99999999;" +
@@ -204,13 +232,13 @@ function print(Obj, lib) {
             "color:#ddd;" +
             "overflow: auto;" +
             "margin:0;";
-        div.id = "loggingBar";
+        div.id = place;
         div.style.cssText = css;
         div.innerHTML = Obj;
         document.body.appendChild(div);
-        let script = document.createElement("script");
+        var script = document.createElement("script");
         script.type = "text/javascript";
-        script.innerHTML = `var x=document.getElementById("loggingBar");
+        script.innerHTML = `var x=document.getElementById(`+place+`);
                         if(window.addEventListener) {
                           x.addEventListener('DOMSubtreeModified', if_changed, false);
                         }
@@ -222,8 +250,8 @@ function print(Obj, lib) {
 }
 
 function stringifyObject(e) {
-    const obj = {};
-    for (let k in e) {
+    var obj = {};
+    for (var k in e) {
         obj[k] = e[k];
     }
     var str = JSON.stringify(obj, (k, v) => {
@@ -241,14 +269,24 @@ function Hide(divID) {
     divID.style.display = "none";
 }
 
-function Clear(divID) {
-    divID.innerHTML = '    <div id="right">\
+function Clear(div) {
+  if(div.innerHTML.includes("loggingBar"))
+      div.innerHTML = '    <div id="right">\
         <a href="#" onclick="Hide(loggingBar);">X</a>...\
         <a href="#" onclick="Clear(loggingBar);">Clear</a>\
     </div>\
     <div id="left">\
         Logging\
     </div>';
+
+    if(div.innerHTML.includes("diffBar"))
+    div.innerHTML = '    <div id="right">\
+      <a href="#" onclick="Hide(diffBar);">X</a>...\
+      <a href="#" onclick="Clear(diffBar);">Clear</a>\
+  </div>\
+  <div id="left">\
+      Diff\
+  </div>';
 }
 
 
@@ -261,3 +299,83 @@ function toggleVisibility(id) {
         el.style.visibility = "visible";
     }
 }
+
+
+// from php.js
+function in_array (needle, haystack) {
+  for (key in haystack) {
+    if (haystack[key] == needle) {
+      return true;
+    }
+  }
+  return false;
+}
+
+// takes the text of a paragraph element as input
+// returns marked up text with repeated words in 'b' tags with a class matching their "stemmed" root
+function checkWords(input) {
+
+  var words = input.split(' ');
+  var wordcount = {};
+
+  // build an object to count word frequency
+  $.each(words,function(i){
+    thisWord = String(this).replace(/[\/\\]/,' ').replace(/[^a-z' ]/gi,'').toLowerCase();
+    var word = stemmer(thisWord);
+    if (wordcount[word] > 0 && word.length) {
+      wordcount[word] += 1;
+    } else {
+      wordcount[word] = 1;
+    }
+  });
+
+  // convert the object to an object array
+  // include only words repeated more than once within the paragraph
+  var topwords = new Array();
+  $.each(wordcount,function(w,i){
+    if (i > 1)
+      topwords.push({'word':w,'freq':i});
+  });
+
+  // convert the object array to a flat array
+  topwordsArr = new Array();
+    $.each(topwords,function(i) {
+    topwordsArr.push(String(this['word']));
+  });
+
+  // re-parse the output, marking up repeated words based on their stems
+  var output = '';
+  $.each(words,function(w) {
+    var aWord = String(this);
+    var stripWord = stemmer(aWord.replace(/[\/\\]/,' ').replace(/[^a-z' ]/gi,'').toLowerCase());
+    if (in_array(stripWord,topwordsArr))
+      output += ' <b class="'+stripWord+'">'+aWord+'</b>';
+    else
+      output += ' '+aWord;
+  });
+  return output;
+}
+
+(function($){
+  // grab common top-level elements
+  grafs = $('p,ul,ol,blockquote,h1,h2,h3,h4,h5,h6,pre code',$('#content'));
+  // navigate each element found
+  $.each(grafs,function(a,g){
+    // if it's a paragraph, we'll process it
+    if (grafs[a].tagName == "P") {
+      $('#work').append($('<p>').html(checkWords($(grafs[a]).text())));
+    // if not, we just stick it back into the DOM
+    } else {
+      $('#work').append(grafs[a]);
+    }
+  });
+  // set up hover listeners on the 'b' elements
+  // the class is pulled from the hovered element
+  // all similar words are highlighted on hover
+  $('b','#work').hover(function(){
+    var thisClass = this.className;
+    $('.'+thisClass).addClass('highlight');
+  },function(){
+    $('.highlight').removeClass('highlight');
+  });
+})(jQuery);

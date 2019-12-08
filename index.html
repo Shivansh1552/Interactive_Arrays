@@ -123,7 +123,15 @@
             position: absolute;
             width: 1px;
         }
-
+        b {
+          color: #bada55;
+          font-weight:bold;
+          -webkit-transition:color .2s ease-in-out;
+          -moz-transition:color .2s ease-in-out;
+          -o-transition:color .2s ease-in-out;
+          transition:color .2s ease-in-out;
+        }
+        .highlight { color:rgba(207, 95, 205, 1);}
     </style>
     <meta name="Description" content="WYSIWYG JavaScript libraries loading using browser developer tools for testing and learning. Load Jquery, Underscore, Lodash in your browser console">
 
@@ -142,6 +150,7 @@
     <div id="options">
         <h1> _Interactive Arrays</h1>
         <div id='loaded_list'></div>
+
         <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
         <p>A) Select libraries you want to load</p>
         <div id="frameworks">
@@ -186,15 +195,30 @@
             <button type="button" value="Unload" onclick="unloadScripts(this.value)">Unload</button>
         </form>
         <hr>
+        <p>C) Diff of two libraries! Just select two libs:</p>
+        <div id="frameworksDiff">
+
+        </div>
+        <button id="FrameworksDiff" style="border: 1px solid red">Diff</button>
+        <div class="ShowHide" id="diffBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
+            <div id="right">
+                <a href="javascript:void(0)" onclick="Hide(diffBar); return false;">X</a><br>
+                <a href="javascript:void(0)" onclick="Clear(diffBar); return false;">Clear</a>
+            </div>
+            <div id="left">
+                Diff
+            </div>
+        </div>
+        <hr>
         <p>This section shows results of 'print(obj)' which returns all functions in obj along with links to official documentations.</p>
         <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
             <div id="right">
                 <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
                 <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
             </div>
-            <pre id="left">
+            <div id="left">
                 Logging
-            </pre>
+            </div>
         </div>
     </div>
     <br>
@@ -202,6 +226,7 @@
         I acknowledge <a href="https://github.com/bacloud14/Interactive_Arrays">code here</a> is very poorly written, as I am a beginner in JS for web developement. If you have time to review not more than one thousand lines of code as a form of collaboration, you are more than welcome.</p>
 </body>
 <script src="resources/js/main.js"></script>
+<script src="vendors/stemmer.js"></script>
 <script src="vendors/devtools-detect-index.js"></script>
 
 
