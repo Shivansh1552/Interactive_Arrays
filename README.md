@@ -13,3 +13,7 @@ Another handy way, is to tell the library's name, the targeted version via URL i
 Todo:
 test and improve
 add feature to enrich interaction from the console to the HTML page (beautify and display console.dir for example)
+
+On Glitch: 
+https://glitch.com/~positive-save
+You can point some error or improvement.
