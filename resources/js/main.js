@@ -79,7 +79,7 @@ function _loadScript(selectedIds) {
                 loaded.push(this.newVarPath);
                 document.getElementById("loaded_list").innerHTML = JSON.stringify(loaded);
                 $.each(loaded,function(index,value){
-                  var checkbox="<label><input type='checkbox' id="+value+" value="+value+"><span class='checkable'>"+value+"</span></label>";
+                  var checkbox="<label><input type='checkbox' value="+value+"@><span class='checkable'>"+value+"</span></label>";
                   if(!$("#frameworksDiff").text().includes(value))
                     $("#frameworksDiff").append($(checkbox));
                 })
@@ -149,8 +149,12 @@ $(document).ready(function ($) {
         var selectedIds = $("#frameworksDiff :checkbox:checked").map(function () {
             return $(this).val();
         }).get();
+        selectedIds = selectedIds.map(function(str){
+          return str.substring(0, str.length - 1);
+        });
         var functions = [];
         selectedIds.map(function(lib, index){
+          debugger;
           if(index==0)
             functions.push("<b>"+lib+"</b><br>");
           else {
