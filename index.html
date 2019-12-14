@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Arrays</title>
+    <link href="https://fonts.googleapis.com/css?family=Merienda|Raleway" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" type="text/javascript"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
@@ -14,27 +15,29 @@
     <style>
         .ShowHide {
             overflow: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #1963D1;
-            color: #FFFFFF;
-            padding: 4px;
+            font-family: Raleway, sans-serif;
+            background-color: #fff;
+            color: rgb(9 , 19 , 51) ;
+            padding: 8px;
         }
 
         #left {
             overflow: hidden;
             text-align: center;
-            height: 20px;
+            height: 40px;
+            padding: 5px;
         }
 
         #right {
             float: right;
             width: 30px;
-            height: 20px;
+            height: 30px;
+            padding: 4px;
             text-align: center;
         }
 
         .ShowHide a {
-            color: #FFFFFF;
+            color: #000;
             text-decoration: none;
         }
 
@@ -46,12 +49,15 @@
             width: 800px;
             margin: 0 auto;
             background: #f0faf3;
+            padding: 10px;
         }
 
         #options {
             width: 800px;
             margin: 0 auto;
-            background: #f0faf3;
+            background:whitesmoke;
+            padding: 10px;
+            z-index: -1;
         }
 
         h1 {
@@ -71,7 +77,21 @@
             background: #500;
             color: #baaaaa
         }
-
+        
+        #Frameworks{
+            background: rgb(9 , 19 , 51);
+            border: 2px solid transparent;
+            color: whitesmoke;
+            margin-left: 350px;
+            margin-top: 30px;
+/*            margin-bottom: 40px;*/
+        }
+        #Frameworks:hover{
+            background: transparent;
+            border: 2px solid rgb(9 , 19 , 51);
+            color: rgb(9 , 19 , 51);
+        }
+        
         .ui-autocomplete {
             position: absolute;
             top: 100%;
@@ -139,8 +159,8 @@
 
 <body>
     <div id="error">
-        <h1> _Interactive Arrays</h1>
-        <p style="background-color:red;color:white;font-size:150%">Welcome to Interactive Arrays! Chrome console is not open so you need to open it to continue!</p>
+        <h1 style="color: white;font-family: 'Raleway', sans-serif;text-align: center">INTERACTIVE_ARRAYS</h1>
+        <p style="background-color:transparent;color:rgb(9 , 19 , 51);font-size:1.5em;text-align: center;font-weight: bold;font-family: Raleway,sans-serif">Welcome to Interactive Arrays! <br>Chrome console is not open so you need to open it to continue!<br>( Press 'ctrl + shift + I' to open console )</p>
         <img height="100%" width="100%" class="lozad" data-src="resources/images/Peugeot_404_Injection.jpg" />
         <p>
             The Peugeot 404 is a large family car produced by French automobile manufacturer Peugeot from 1960 to 1975. A truck body style variant was marketed until 1988. The 404 was manufactured under licence in various African countries until 1991 (in Kenya) and was manufactured in Argentina by Safrar/Sevel in El Palomar, in Québec, Canada at the St-Bruno-de-Montarville SOMA Ltd. plant and in Chile by Automotores Franco Chilena S.A. in Los Andes. <a href="https://en.wikipedia.org/wiki/Peugeot_404">The Wikipedia</a>
@@ -148,76 +168,76 @@
     </div>
 
     <div id="options">
-        <h1> _Interactive Arrays</h1>
+        <h1 style="color: white;font-family: 'Raleway', sans-serif;text-align: center">INTERACTIVE_ARRAYS</h1>
         <div id='loaded_list'></div>
 
         <p>Before loading a library, please check Chrome console for loggings on what's going on!</p>
-        <p>A) Select libraries you want to load</p>
+        <p style="font-weight: bold">A) Select libraries you want to load</p>
         <div id="frameworks">
-            <label><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span class="checkable">lodash</span>
+            <label><input id="@lodash" value="lodash" type="checkbox" onChange="toggleVisibility('lodashIcon');"><span class="checkable" style="margin: 20px;">lodash</span>
             </label>
-            <label><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span class="checkable">underscore</span>
+            <label><input id="@underscore" value="underscore" type="checkbox" onChange="toggleVisibility('underscoreIcon');"><span class="checkable" style="margin: 20px;">underscore</span>
             </label>
-            <label><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span class="checkable">ramda</span>
+            <label><input id="@ramda" value="ramda" type="checkbox" onChange="toggleVisibility('ramdaIcon');"><span class="checkable" style="margin: 20px;">ramda</span>
             </label>
-            <label><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span class="checkable">moment</span>
+            <label><input id="@moment" value="moment" type="checkbox" onChange="toggleVisibility('momentIcon');"><span class="checkable" style="margin: 20px;">moment</span>
             </label>
-            <label><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span class="checkable">math</span>
+            <label><input id="@math" value="math" type="checkbox" onChange="toggleVisibility('mathIcon');"><span class="checkable" style="margin: 20px;">math</span>
             </label>
-            <label><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span class="checkable">collect</span>
+            <label><input id="@collect" value="collect" type="checkbox" onChange="toggleVisibility('collectIcon');"><span class="checkable" style="margin: 20px;">collect</span>
             </label>
         </div>
-        <button id="Frameworks" style="border: 1px solid red">Load</button>
+        <button id="Frameworks">Load</button>
         <br>
-        <img id="lodashIcon" class="lozad" data-src="resources/images/lodash.png" style="visibility:hidden" width="100" />
-        <img id="underscoreIcon" class="lozad" data-src="resources/images/underscore.png" style="visibility:hidden" width="100" />
-        <img id="ramdaIcon" class="lozad" data-src="resources/images/ramda.png" style="visibility:hidden" width="100" />
-        <img id="momentIcon" class="lozad" data-src="resources/images/moment.png" style="visibility:hidden" width="100" />
-        <img id="mathIcon" class="lozad" data-src="resources/images/math.png" style="visibility:hidden" width="100" />
-        <img id="collectIcon" class="lozad" data-src="resources/images/collect.jpg" style="visibility:hidden" width="100" />
+        <img id="lodashIcon" class="lozad" data-src="resources/images/lodash.png" style="visibility:hidden ; margin:10px;" width="100" />
+        <img id="underscoreIcon" class="lozad" data-src="resources/images/underscore.png" style="visibility:hidden;margin:10px;" width="100" />
+        <img id="ramdaIcon" class="lozad" data-src="resources/images/ramda.png" style="visibility:hidden;margin:10px;" width="100" />
+        <img id="momentIcon" class="lozad" data-src="resources/images/moment.png" style="margin:10px;visibility:hidden" width="100" />
+        <img id="mathIcon" class="lozad" data-src="resources/images/math.png" style="margin:10px;visibility:hidden" width="100" />
+        <img id="collectIcon" class="lozad" data-src="resources/images/collect.jpg" style="margin:10px;visibility:hidden" width="120" height="30px" />
 
         <hr>
 
-        <p>B) Load another library! (experimental)</p>
-        <form>
+        <p style="margin-top: 20px;font-weight: bold">B) Load another library! (experimental)</p>
+        <form style="border-bottom: 1px solid grey;">
             Library:<br>
-            <input type="text" id="arbLibrary"><br>
-            CDN URL: https://cdnjs.cloudflare.com/... (required)<br>
-            <input type="text" id="arbURL" onclick="updateInput(this.value)"><br>
+            <input type="text" id="arbLibrary" ><br><br>
+            CDN URL:<br>
+            <input type="text" id="arbURL" placeholder="Type URL including https://cdnjs.cloudflare.com/... " required onclick="updateInput(this.value)" ><br><br>
             Version variable (optional)<br>
-            <input type="text" id="arbVersion"><br><br>
-            Library default variable (required)<br>
+            <input type="text" id="arbVersion" required><br><br>
+            Library default variable <br>
             <input type="text" id="arbVariable"><br><br>
-            <input type="button" value="Load" onclick="custom_loadScript()">
+            <button style = "background-color: rgb(9 , 19 , 51);color: white;width: 80px;margin-left: 350px;margin-bottom: 10px;" type="button" value="Load" onclick="custom_loadScript()">Load</button>
         </form>
-        <p>C) Unload all</p>
+        <p style="margin-top : 20px;font-weight: bold">C) Unload all</p>
         <form>
-            <button type="button" value="Unload" onclick="unloadScripts(this.value)">Unload</button>
+            <button style = "background-color: rgb(9 , 19 , 51);color: white;margin-left: 346px;"  type="button" value="Unload" onclick="unloadScripts(this.value)">Unload</button>
         </form>
         <hr>
-        <p>C) Diff of two libraries! Just select two libs:</p>
+        <p style="margin-top : 20px;font-weight: bold">D) Diff of two libraries! Just select two libs:</p>
         <div id="frameworksDiff">
 
         </div>
-        <button id="FrameworksDiff" style="border: 1px solid red">Diff</button>
+        <button id="FrameworksDiff" style="background: rgb(9 , 19 , 51);border: 2px solid transparent;color: whitesmoke;margin-left: 337px;margin-bottom: 10px;">Difference</button>
         <div class="ShowHide" id="diffBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
             <div id="right">
-                <a href="javascript:void(0)" onclick="Hide(diffBar); return false;">X</a><br>
-                <a href="javascript:void(0)" onclick="Clear(diffBar); return false;">Clear</a>
+                <a href="javascript:void(0)" onclick="Hide(diffBar); return false;">[X]</a><br>
+             
             </div>
             <div id="left">
-                Diff
+                Difference between the libraries
             </div>
         </div>
         <hr>
         <p>This section shows results of 'print(obj)' which returns all functions in obj along with links to official documentations.</p>
         <div class="ShowHide" id="loggingBar" style="overflow-y:scroll; overflow-x:hidden; height:100px;">
             <div id="right">
-                <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">X</a><br>
-                <a href="javascript:void(0)" onclick="Clear(loggingBar); return false;">Clear</a>
+                <a href="javascript:void(0)" onclick="Hide(loggingBar); return false;">[X]</a><br>
+                
             </div>
             <div id="left">
-                Logging
+                Loggings
             </div>
         </div>
     </div>
